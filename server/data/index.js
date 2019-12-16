@@ -89,7 +89,7 @@ var addUser = function(user, callback) {
 
 // place
 var addPlace = function(place, callback) {
-    var newPlace = new userModel(place);
+    var newPlace = new placeModel(place);
     newPlace.save((err)=> {
         if (!err) {
             callback(true, newPlace)
@@ -101,7 +101,7 @@ var addPlace = function(place, callback) {
 
 // course
 var addCourse = function(course, callback) {
-    var newCourse = new userModel(course);
+    var newCourse = new courseModel(course);
     newCourse.save((err)=> {
         if (!err) {
             callback(true, newCourse)
@@ -120,25 +120,34 @@ var addCourse = function(course, callback) {
 // user
 var deleteUser = function(id, callback) {
     userModel.deleteOne({_id: id}, (err)=> {
-        callback(false);
+        if (!err) {
+            callback(true);
+        } else {
+            callback(false);
+        }
     })
-    callback(true);
 }
 
 // place
 var deletePlace = function(id, callback) {
     placeModel.deleteOne({_id: id}, (err)=> {
-        callback(false);
+        if (!err) {
+            callback(true);
+        } else {
+            callback(false);
+        }
     })
-    callback(true);
 }
 
 // course
 var deleteCourse = function(id, callback) {
     courseModel.deleteOne({_id: id}, (err)=> {
-        callback(false);
+        if (!err) {
+            callback(true);
+        } else {
+            callback(false);
+        }
     })
-    callback(true);
 }
 
 ///////////////////////////////
@@ -188,7 +197,6 @@ var updateUser = function(id, user, callback) {
     userModel.updateOne({_id: id}, user).then(()=> {
         callback(true);
     })
-    callback(false);
 }
 
 // place
@@ -196,7 +204,6 @@ var updatePlace = function(id, place, callback) {
     placeModel.updateOne({_id: id}, place).then(()=> {
         callback(true);
     })
-    callback(false);
 }
 
 // course
@@ -204,7 +211,6 @@ var updateCourse = function(id, course, callback) {
     courseModel.updateOne({_id: id}, course).then(()=> {
         callback(true);
     })
-    callback(false);
 }
 
 ///////////////////////////////

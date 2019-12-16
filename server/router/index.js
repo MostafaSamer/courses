@@ -90,7 +90,7 @@ router.post('/user/place/rate', (req, res)=> {
     // Change place data
     data.searchPlacebyId(placeId, (result)=> {
         newSum = result.rate.lastSum + rate
-        newRate = newSum/result.rate.lastSum + 1
+        newRate = newSum/result.rate.vote + 1
         result.rate.lastSum = newSum
         result.rate.value = newRate
         data.updatePlace(placeId, result, (updateResult)=> {
@@ -179,7 +179,7 @@ router.post('/user/course/rate', (req, res)=> {
     var rate = req.body.rate
     data.searchCoursebyId(courseId, (result)=> {
         newSum = result.rate.lastSum + rate
-        newRate = newSum/result.rate.lastSum + 1
+        newRate = newSum/result.rate.vote + 1
         result.rate.lastSum = newSum
         result.rate.value = newRate
         data.updateCourse(courseId, result, (updateResult)=> {
@@ -351,7 +351,7 @@ router.post('/sysadmin/place/search', (req, res)=> {
 })
 
 router.post('/sysadmin/place/view', (req, res)=> {
-    var placeId = req.body.id
+    var placeId = req.body.placeId
     data.searchPlacebyId(placeId, (result)=> {
         res.json({
             error: 0,
@@ -382,10 +382,17 @@ router.post('/placeadmin/course/add', (req, res)=> {
     }
     data.addCourse(newCourse, (result, obj)=> {
         if (result) {
-            res.json({
-                error: 0,
-                message: "Add Successfull",
-                data: obj
+            data.searchPlacebyId(place_id, (result)=> {
+                result.courses.push(obj._id)
+                data.updatePlace(place_id, result, (result)=> {
+                    if (result) {
+                        res.json({
+                            error: 0,
+                            message: "Add Successfull",
+                            data: obj
+                        })
+                    }
+                })
             })
         } else {
             res.json({
