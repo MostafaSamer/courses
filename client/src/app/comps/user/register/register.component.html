@@ -1,1 +1,70 @@
-<p>register works!</p>
+<!-- BACKGROUND -->
+<!-- LOGO -->
+<form (ngSubmit)='onSubmit()'>
+    <!-- Name -->
+    <label for="email">Name: </label>
+    <input type="text" name="name" value="" required minlength="4" #name="ngModel" [(ngModel)]="registerName">
+    <!-- Name Error Validation -->
+    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors.required">
+            Name is required.
+        </div>
+        <div *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+        </div>
+    </div>
+    <!-- Email -->
+    <label for="email">Email: </label>
+    <input type="email" name="email" value="" required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #email="ngModel" [(ngModel)]="registerEmail">
+    <!-- Email Error Validation -->
+    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors.required">
+            Email is required.
+        </div>
+        <div *ngIf="email.errors.pattern">
+            Input must be an valid email
+        </div>
+    </div>
+    <!-- GENDER -->
+    <!-- Gender Error Validation -->
+    <!-- Password -->
+    <label for="pass">Password: </label>
+    <input type="password" name="pass" value="" required minlength="8" #pass="ngModel" [(ngModel)]="registerPass">
+    <!-- Password Error Validation -->
+    <div *ngIf="pass.invalid && (pass.dirty || pass.touched)">
+        <div *ngIf="pass.errors.required">
+            Password is required.
+        </div>
+        <div *ngIf="pass.errors.minlength">
+            Password must be at least 8 characters long.
+        </div>
+    </div>
+    <!-- Confirm Password -->
+    <label for="pass">Confirm Password: </label>
+    <input type="password" name="confirmPass" value="" required minlength="8" #confirmPass="ngModel" [(ngModel)]="registerConPass">
+    <!-- Confirm Password Error Validation -->
+    <div *ngIf="confirmPass.invalid && (email.dirty || confirmPass.touched)">
+        <div *ngIf="confirmPass.errors.required">
+            Confirm Password is required.
+        </div>
+        <div *ngIf="confirmPass.errors.minlength">
+            Confirm Password must be at least 8 characters long.
+        </div>
+        <div *ngIf="confirmPass != pass">
+            Password does not match
+        </div>
+    </div>
+    <div>
+        <div *ngIf="err">
+            {{error_mess}}
+        </div>
+        <br>
+        <div class="" *ngIf="name.errors">
+            <button type="submit" name="button" disabled>Apply</button>
+        </div>
+        <div class="" *ngIf="!name.errors">
+            <button type="submit" name="button">Apply</button>
+        </div>
+    </div>
+</form>
+ <a [routerLink]="['/user/login']">Have account?</a>

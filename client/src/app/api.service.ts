@@ -23,4 +23,15 @@ export class ApiService {
       }))
   }
 
+  public register(name, email, gender, pass) {
+      return this.http.post<any>(`${ConfigVariables.API_URL}user/register`, {
+          'name': name,
+          'email': email,
+          'gender': gender,
+          'pass': pass,
+      }).pipe(map((res: any)=> {
+          return res;
+      }))
+  }
+
 }

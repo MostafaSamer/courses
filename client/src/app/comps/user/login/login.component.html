@@ -1,21 +1,33 @@
 <!-- BACKGROUND -->
 <!-- LOGO -->
 <form (ngSubmit)='onSubmit()'>
-    <div class="from-group">
-        <label for="email">Email: </label>
-        <input class="form-control" type="email" name="email" value="" [(ngModel)]="loginEmail">
-        <br>
-        <label for="pass">Password: </label>
-        <input class="form-control" type="password" name="pass" value="" [(ngModel)]="loginPass">
-        <br>
-        <div class="text-center">
-            <div class="alert alert-danger" *ngIf="err">
-                {{error_mess}}
-            </div>
-            <br>
-            <button type="submit" name="button" class="btn btn-primary btn-lg">Login</button>
+    <!-- Email -->
+    <label for="email">Email: </label>
+    <input type="email" name="email" value="" required #email="ngModel" [(ngModel)]="loginEmail">
+    <!-- Email Error Validation -->
+    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors.required">
+            Email is required.
         </div>
+    </div>
+    <br>
+    <!-- Password -->
+    <label for="pass">Password: </label>
+    <input type="password" name="pass" value="" required #pass="ngModel" [(ngModel)]="loginPass">
+    <!-- Password Error Validation -->
+    <div *ngIf="pass.invalid && (pass.dirty || pass.touched)">
+        <div *ngIf="pass.errors.required">
+            Password is required.
+        </div>
+    </div>
+    <br>
+    <div>
+        <div *ngIf="err">
+            {{error_mess}}
+        </div>
+        <br>
+        <button type="submit" name="button">Login</button>
     </div>
 </form>
 <!-- FORGET PASSWORD -->
-<!-- VREATE NEW ACCOUNT -->
+ <a [routerLink]="['/user/register']">Create a new account</a>

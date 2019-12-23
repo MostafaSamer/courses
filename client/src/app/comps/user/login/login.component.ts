@@ -20,12 +20,10 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
   }
 
   onSubmit() {
       this.api.login(this.loginEmail, this.loginPass).pipe().subscribe((data)=> {
-          console.log(data.error)
           if(data.error == 1) {
               this.err = true;
               this.error_mess = data.message
