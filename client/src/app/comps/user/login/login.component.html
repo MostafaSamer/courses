@@ -1,22 +1,22 @@
 <!-- BACKGROUND -->
 <!-- LOGO -->
-<form (ngSubmit)='onSubmit()'>
+<form [formGroup]="userForm" (ngSubmit)='onSubmit()'>
     <!-- Email -->
     <label for="email">Email: </label>
-    <input type="email" name="email" value="" required #email="ngModel" [(ngModel)]="loginEmail">
+    <input type="email" name="email" value="" formControlName="email">
     <!-- Email Error Validation -->
-    <div *ngIf="email.invalid && (email.dirty || email.touched)">
-        <div *ngIf="email.errors.required">
+    <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
+        <div *ngIf="userForm.get('email').errors.required">
             Email is required.
         </div>
     </div>
     <br>
     <!-- Password -->
     <label for="pass">Password: </label>
-    <input type="password" name="pass" value="" required #pass="ngModel" [(ngModel)]="loginPass">
+    <input type="password" name="pass" value="" formControlName="pass">
     <!-- Password Error Validation -->
-    <div *ngIf="pass.invalid && (pass.dirty || pass.touched)">
-        <div *ngIf="pass.errors.required">
+    <div *ngIf="userForm.get('pass').invalid && (userForm.get('pass').dirty || userForm.get('pass').touched)">
+        <div *ngIf="userForm.get('pass').errors.required">
             Password is required.
         </div>
     </div>

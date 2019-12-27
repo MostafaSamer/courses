@@ -1,68 +1,74 @@
+<!--
+
 <!-- BACKGROUND -->
 <!-- LOGO -->
-<form (ngSubmit)='onSubmit()'>
+<form [formGroup]="userForm" (ngSubmit)='onSubmit()'>
     <!-- Name -->
     <label for="email">Name: </label>
-    <input type="text" name="name" value="" required minlength="4" #name="ngModel" [(ngModel)]="registerName">
+    <input type="text" name="name" value="" formControlName="name">
     <!-- Name Error Validation -->
-    <div *ngIf="name.invalid && (name.dirty || name.touched)">
-        <div *ngIf="name.errors.required">
+    <div *ngIf="userForm.get('name').invalid && (userForm.get('name').dirty || userForm.get('name').touched)">
+        <div *ngIf="userForm.get('name').errors.required">
             Name is required.
         </div>
-        <div *ngIf="name.errors.minlength">
+        <div *ngIf="userForm.get('name').errors.minlength">
             Name must be at least 4 characters long.
         </div>
     </div>
     <!-- Email -->
     <label for="email">Email: </label>
-    <input type="email" name="email" value="" required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #email="ngModel" [(ngModel)]="registerEmail">
+    <input type="email" name="email" value="" formControlName="email">
     <!-- Email Error Validation -->
-    <div *ngIf="email.invalid && (email.dirty || email.touched)">
-        <div *ngIf="email.errors.required">
+    <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
+        <div *ngIf="userForm.get('email').errors.required">
             Email is required.
         </div>
-        <div *ngIf="email.errors.pattern">
+        <div *ngIf="userForm.get('email').errors.email">
             Input must be an valid email
         </div>
     </div>
     <!-- GENDER -->
+    <label for="">Gender: </label>
+    <input type="radio" value="true" name="gender" formControlName="gender">Male
+    <input type="radio" value="false" name="gender" formControlName="gender">Female
+    {{userForm.get('gender').value}}
     <!-- Gender Error Validation -->
+    <!-- Not Require -->
     <!-- Password -->
     <label for="pass">Password: </label>
-    <input type="password" name="pass" value="" required minlength="8" #pass="ngModel" [(ngModel)]="registerPass">
+    <input type="password" name="pass" value="" formControlName="pass">
     <!-- Password Error Validation -->
-    <div *ngIf="pass.invalid && (pass.dirty || pass.touched)">
-        <div *ngIf="pass.errors.required">
+    <div *ngIf="userForm.get('pass').invalid && (userForm.get('pass').dirty || userForm.get('pass').touched)">
+        <div *ngIf="userForm.get('pass').errors.required">
             Password is required.
         </div>
-        <div *ngIf="pass.errors.minlength">
+        <div *ngIf="userForm.get('pass').errors.minlength">
             Password must be at least 8 characters long.
         </div>
     </div>
     <!-- Confirm Password -->
     <label for="pass">Confirm Password: </label>
-    <input type="password" name="confirmPass" value="" required minlength="8" #confirmPass="ngModel" [(ngModel)]="registerConPass">
+    <input type="password" name="confirmPass" value="" formControlName="conPass">
     <!-- Confirm Password Error Validation -->
-    <div *ngIf="confirmPass.invalid && (email.dirty || confirmPass.touched)">
-        <div *ngIf="confirmPass.errors.required">
+    <div *ngIf="userForm.get('conPass').invalid && (userForm.get('conPass').dirty || userForm.get('conPass').touched)">
+        <div *ngIf="userForm.get('conPass').errors.required">
             Confirm Password is required.
         </div>
-        <div *ngIf="confirmPass.errors.minlength">
-            Confirm Password must be at least 8 characters long.
-        </div>
-        <div *ngIf="confirmPass != pass">
-            Password does not match
-        </div>
+    </div>
+    <div *ngIf="userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value)">
+        Password does not match
     </div>
     <div>
         <div *ngIf="err">
             {{error_mess}}
         </div>
         <br>
-        <div class="" *ngIf="name.errors">
+        <div class="" *ngIf="userForm.invalid ||
+                                (userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value))">
             <button type="submit" name="button" disabled>Apply</button>
         </div>
-        <div class="" *ngIf="!name.errors">
+        <div class="" *ngIf="userForm.valid &&
+                                !(userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value))">
             <button type="submit" name="button">Apply</button>
         </div>
     </div>
