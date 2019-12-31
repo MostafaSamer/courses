@@ -1,76 +1,83 @@
-<!--
-
-<!-- BACKGROUND -->
-<!-- LOGO -->
-<form [formGroup]="userForm" (ngSubmit)='onSubmit()'>
-    <!-- Name -->
-    <label for="email">Name: </label>
-    <input type="text" name="name" value="" formControlName="name">
-    <!-- Name Error Validation -->
-    <div *ngIf="userForm.get('name').invalid && (userForm.get('name').dirty || userForm.get('name').touched)">
-        <div *ngIf="userForm.get('name').errors.required">
-            Name is required.
+<div class="text-center">
+    <!-- LOGO -->
+    <img src="../../../../assets/logo/Artwork 1.png" alt="" class="logo-img">
+    <form [formGroup]="userForm" (ngSubmit)='onSubmit()'>
+        <div class="form-group text-center">
+            <!-- Name -->
+            <input type="text" name="name" value="" formControlName="name" class="form-control input-feild" placeholder="Name">
+            <!-- Name Error Validation -->
+            <div *ngIf="userForm.get('name').invalid && (userForm.get('name').dirty || userForm.get('name').touched)">
+                <div *ngIf="userForm.get('name').errors.required">
+                    Name is required.
+                </div>
+                <div *ngIf="userForm.get('name').errors.minlength">
+                    Name must be at least 4 characters long.
+                </div>
+            </div>
+            <!-- Email -->
+            <input type="email" name="email" value="" formControlName="email" class="form-control input-feild" placeholder="Email">
+            <!-- Email Error Validation -->
+            <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
+                <div *ngIf="userForm.get('email').errors.required">
+                    Email is required.
+                </div>
+                <div *ngIf="userForm.get('email').errors.email">
+                    Input must be an valid email
+                </div>
+            </div>
+            <!-- GENDER -->
+            <label for="" class="gender-txt form-control">Gender: </label>
+            <div class=" gender-input">
+                <span class="gender-input-inner">
+                    <input type="radio" value="true" name="gender" formControlName="gender" class="form-check-input">Male
+                </span>
+                <span class="gender-input-inner">
+                    <input type="radio" value="false" name="gender" formControlName="gender" class="form-check-input">Female
+                </span>
+            </div>
+            <!-- Gender Error Validation -->
+            <!-- Not Require -->
+            <!-- Password -->
+            <input type="password" name="pass" value="" formControlName="pass" class="form-control input-feild" placeholder="Password">
+            <!-- Password Error Validation -->
+            <div *ngIf="userForm.get('pass').invalid && (userForm.get('pass').dirty || userForm.get('pass').touched)">
+                <div *ngIf="userForm.get('pass').errors.required">
+                    Password is required.
+                </div>
+                <div *ngIf="userForm.get('pass').errors.minlength">
+                    Password must be at least 8 characters long.
+                </div>
+            </div>
+            <!-- Confirm Password -->
+            <input type="password" name="confirmPass" value="" formControlName="conPass" class="form-control input-feild" placeholder="Confirm Password">
+            <!-- Confirm Password Error Validation -->
+            <div *ngIf="userForm.get('conPass').invalid && (userForm.get('conPass').dirty || userForm.get('conPass').touched)">
+                <div *ngIf="userForm.get('conPass').errors.required">
+                    Confirm Password is required.
+                </div>
+            </div>
+            <div *ngIf="userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value)">
+                Password does not match
+            </div>
+            <div>
+                <div *ngIf="err">
+                    {{error_mess}}
+                </div>
+                <br>
+                <div class="" *ngIf="userForm.invalid ||
+                                        (userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value))">
+                                        <button type="submit"  class="btn btn-default" disabled >
+                                            <img src="../../../../assets/buttons/apply/Group 136.png"  alt="">
+                                        </button>
+                </div>
+                <div class="" *ngIf="userForm.valid &&
+                                        !(userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value))">
+                                        <button type="submit"  class="btn btn-default" >
+                                            <img src="../../../../assets/buttons/apply/Group 136.png"  alt="">
+                                        </button>
+                </div>
+            </div>
         </div>
-        <div *ngIf="userForm.get('name').errors.minlength">
-            Name must be at least 4 characters long.
-        </div>
-    </div>
-    <!-- Email -->
-    <label for="email">Email: </label>
-    <input type="email" name="email" value="" formControlName="email">
-    <!-- Email Error Validation -->
-    <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
-        <div *ngIf="userForm.get('email').errors.required">
-            Email is required.
-        </div>
-        <div *ngIf="userForm.get('email').errors.email">
-            Input must be an valid email
-        </div>
-    </div>
-    <!-- GENDER -->
-    <label for="">Gender: </label>
-    <input type="radio" value="true" name="gender" formControlName="gender">Male
-    <input type="radio" value="false" name="gender" formControlName="gender">Female
-    {{userForm.get('gender').value}}
-    <!-- Gender Error Validation -->
-    <!-- Not Require -->
-    <!-- Password -->
-    <label for="pass">Password: </label>
-    <input type="password" name="pass" value="" formControlName="pass">
-    <!-- Password Error Validation -->
-    <div *ngIf="userForm.get('pass').invalid && (userForm.get('pass').dirty || userForm.get('pass').touched)">
-        <div *ngIf="userForm.get('pass').errors.required">
-            Password is required.
-        </div>
-        <div *ngIf="userForm.get('pass').errors.minlength">
-            Password must be at least 8 characters long.
-        </div>
-    </div>
-    <!-- Confirm Password -->
-    <label for="pass">Confirm Password: </label>
-    <input type="password" name="confirmPass" value="" formControlName="conPass">
-    <!-- Confirm Password Error Validation -->
-    <div *ngIf="userForm.get('conPass').invalid && (userForm.get('conPass').dirty || userForm.get('conPass').touched)">
-        <div *ngIf="userForm.get('conPass').errors.required">
-            Confirm Password is required.
-        </div>
-    </div>
-    <div *ngIf="userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value)">
-        Password does not match
-    </div>
-    <div>
-        <div *ngIf="err">
-            {{error_mess}}
-        </div>
-        <br>
-        <div class="" *ngIf="userForm.invalid ||
-                                (userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value))">
-            <button type="submit" name="button" disabled>Apply</button>
-        </div>
-        <div class="" *ngIf="userForm.valid &&
-                                !(userForm.get('pass').touched && userForm.get('conPass').touched && (userForm.get('pass').value != userForm.get('conPass').value))">
-            <button type="submit" name="button">Apply</button>
-        </div>
-    </div>
-</form>
- <a [routerLink]="['/user/login']">Have account?</a>
+    </form>
+         <a [routerLink]="['/user/login']"  class="forget-txt">Have account?</a>
+</div>

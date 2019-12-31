@@ -1,33 +1,38 @@
-<!-- BACKGROUND -->
-<!-- LOGO -->
-<form [formGroup]="userForm" (ngSubmit)='onSubmit()'>
-    <!-- Email -->
-    <label for="email">Email: </label>
-    <input type="email" name="email" value="" formControlName="email">
-    <!-- Email Error Validation -->
-    <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
-        <div *ngIf="userForm.get('email').errors.required">
-            Email is required.
+<div class="text-center">
+    <!-- LOGO -->
+    <img src="../../../../assets/logo/Artwork 1.png" alt="" class="logo-img">
+    <form [formGroup]="userForm" (ngSubmit)='onSubmit()'>
+        <div class="form-group text-center">
+            <!-- Email -->
+            <input type="email" name="email" value="" placeholder="Email" formControlName="email" class="form-control input-feild">
+            <!-- Email Error Validation -->
+            <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)">
+                <div *ngIf="userForm.get('email').errors.required">
+                    Email is required.
+                </div>
+            </div>
+            <br>
+            <!-- Password -->
+            <input type="password" name="pass" value="" placeholder="Password" formControlName="pass" class="form-control input-feild">
+            <!-- Password Error Validation -->
+            <div *ngIf="userForm.get('pass').invalid && (userForm.get('pass').dirty || userForm.get('pass').touched)">
+                <div *ngIf="userForm.get('pass').errors.required">
+                    Password is required.
+                </div>
+            </div>
+            <br>
+            <div>
+                <div *ngIf="err">
+                    {{error_mess}}
+                </div>
+                <br>
+                <button type="submit"  class="btn btn-default" >
+                    <img src="../../../../assets/buttons/Group 134.png"  alt="">
+                </button>
+            </div>
         </div>
-    </div>
+    </form>
+    <a href="#" class="forget-txt">Forget Password?</a>
     <br>
-    <!-- Password -->
-    <label for="pass">Password: </label>
-    <input type="password" name="pass" value="" formControlName="pass">
-    <!-- Password Error Validation -->
-    <div *ngIf="userForm.get('pass').invalid && (userForm.get('pass').dirty || userForm.get('pass').touched)">
-        <div *ngIf="userForm.get('pass').errors.required">
-            Password is required.
-        </div>
-    </div>
-    <br>
-    <div>
-        <div *ngIf="err">
-            {{error_mess}}
-        </div>
-        <br>
-        <button type="submit" name="button">Login</button>
-    </div>
-</form>
-<!-- FORGET PASSWORD -->
- <a [routerLink]="['/user/register']">Create a new account</a>
+     <a [routerLink]="['/user/register']" class="create-txt">Create a new account</a>
+</div>
