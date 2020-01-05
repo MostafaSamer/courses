@@ -8,18 +8,5 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'client';
-  slider = [
-      {
-          'header': 'Account',
-          'data': ['login', 'profile']
-      },
-      {
-          'header': 'Courses',
-          'data': ['Recomeded Courses', 'Course of the day']
-      },
-      {
-          'header': 'Application',
-          'data': ['Rate us', 'Send Feedback & Rebort', 'Ads removal', 'Privacy Policy']
-      }
-  ]
+    
 }
