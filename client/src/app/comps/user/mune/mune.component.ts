@@ -7,18 +7,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MuneComponent implements OnInit {
 
+    image_pos = '../../../../assets/menu/login/';
+
     slider = [
         {
             'header': 'Account',
-            'data': ['login', 'profile']
+            'data': [{
+                'img': `${this.image_pos}Group 80.png`,
+                'title': "login"
+            }, {
+                'img': "",
+                'title': "profile"
+            }]
         },
         {
             'header': 'Courses',
-            'data': ['Recomeded Courses', 'Course of the day']
+            'data': [{
+                'img': "",
+                'title': "Recomeded Courses"
+            }, {
+                'img': "",
+                'title': "Course of the day"
+            }]
         },
         {
             'header': 'Application',
-            'data': ['Rate us', 'Send Feedback & Rebort', 'Ads removal', 'Privacy Policy']
+            'data': [{
+                'img': "",
+                'title': "Rate us"
+            }, {
+                'img': "",
+                'title': "Send Feedback & Rebort"
+            }, {
+                'img': "",
+                'title': "Ads removal"
+            }, {
+                'img': "",
+                'title': "Privacy Policy"
+            }]
         }
     ]
 
